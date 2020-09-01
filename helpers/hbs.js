@@ -4,22 +4,22 @@ const moment = require("moment");
 module.exports = {
   // For storie date format when story is created
   formatDate: function (date, format) {
-    return moment(date).format(format);
+    return moment(date).utc().format(format)
   },
   // For the text area, this reduces the amount of text shown and adds ...
   truncate: function (str, len) {
     if (str.length > len && str.length > 0) {
-      let new_str = str + "";
-      new_str = str.substr(0, len);
-      new_str = str.substr(0, new_str.lastIndexOf(" "));
-      new_str = new_str.length > 0 ? new_str : str.substr(0, len);
-      return new_str + "...";
+      let new_str = str + ' '
+      new_str = str.substr(0, len)
+      new_str = str.substr(0, new_str.lastIndexOf(' '))
+      new_str = new_str.length > 0 ? new_str : str.substr(0, len)
+      return new_str + '...'
     }
-    return str;
+    return str
   },
   // To remove the p tags shown in the text area
   stripTags: function (input) {
-    return input.replace(/<(?:.|\n)*?>/gm, "");
+    return input.replace(/<(?:.|\n)*?>/gm, '')
   },
   // To add an edit icon to the user logged in story.
   editIcon: function (storyUser, loggedUser, storyId, floating = true) {
@@ -38,7 +38,7 @@ module.exports = {
     return options
       .fn(this)
       .replace(
-        new RegExp(' value="' + selected + ' "'),
+        new RegExp(' value="' + selected + '"'),
         '$& selected="selected"'
       )
       .replace(
